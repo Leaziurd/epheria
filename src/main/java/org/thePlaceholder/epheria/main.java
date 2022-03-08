@@ -23,7 +23,7 @@ public class main extends JavaPlugin
     
     public void onEnable()
     {
-        menuStarMeta.setDisplayName(ChatColor.YELLOW + "Ender Chest");
+        menuStarMeta.setDisplayName(ChatColor.DARK_PURPLE + "MENU");
         menuStar.setItemMeta(this.menuStarMeta);
 
         getServer().getPluginManager().registerEvents(new playerJoinAndQuitEvent(), this);
