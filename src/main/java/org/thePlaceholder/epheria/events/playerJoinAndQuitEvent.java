@@ -15,7 +15,7 @@ import org.bukkit.event.Listener;
 
 public class playerJoinAndQuitEvent implements Listener
 {
-    final Economy economy = main.economy;
+    Economy economy = main.economy;
 
     @EventHandler
     public void playerJoin(PlayerJoinEvent event)
