@@ -1,5 +1,6 @@
 package org.thePlaceholder.epheria.events;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.EventHandler;
@@ -21,16 +22,16 @@ public class inventoriesEvents implements Listener
     @EventHandler
     public void inventoryClick(final InventoryClickEvent event) throws IOException, ClassNotFoundException {
         final HumanEntity human = event.getWhoClicked();
-        final Inventory generalMenu = Bukkit.createInventory((InventoryHolder)null, 27, "MENU");
+        final Inventory generalMenu = Bukkit.createInventory(null, 27, Component.text("MENU"));
         final ItemStack enderChestIcon = new ItemStack(Material.ENDER_CHEST);
         final ItemMeta enderChestIconMeta = enderChestIcon.getItemMeta();
-        enderChestIconMeta.setDisplayName(ChatColor.YELLOW + "Ender Chest");
+        enderChestIconMeta.displayName(Component.text(ChatColor.YELLOW + "Ender Chest"));
         enderChestIcon.setItemMeta(enderChestIconMeta);
         generalMenu.setItem(11, enderChestIcon);
         if (event.getSlot() == 17) {
             human.openInventory(generalMenu);
         }
-        if (event.getSlot() == 11 && event.getView().getTitle() == "MENU") {
+        if (event.getSlot() == 11 && event.getView().title() == Component.text("MENU")) {
             customEnderChest.open(human);
         }
     }

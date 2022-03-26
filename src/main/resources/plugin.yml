@@ -3,12 +3,3 @@ version: "0.0.1"
 main: "org.thePlaceholder.epheria.main"
 api-version: 1.13
 authors: [thePlaceholder]
-depend: [Vault, ProtocolLib]
-commands:
-  b0t:
-    permission: epheria.botcmd
-permissions:
-  epheria.botis:
-    default: false
-  epheria.b0tcmd:
-    default: false

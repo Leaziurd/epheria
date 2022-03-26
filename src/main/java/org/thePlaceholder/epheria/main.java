@@ -1,7 +1,7 @@
 package org.thePlaceholder.epheria;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
-import org.thePlaceholder.epheria.commands.b0tCommands;
 import org.thePlaceholder.epheria.events.interactsEvents;
 import org.thePlaceholder.epheria.events.inventoriesEvents;
 import org.thePlaceholder.epheria.events.messagesEvent;
@@ -13,23 +13,19 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class main extends JavaPlugin
 {
-    private static main instance;
+    public static main instance;
 
     public static ItemStack menuStar = new ItemStack(Material.NETHER_STAR);
     ItemMeta menuStarMeta = menuStar.getItemMeta();
     
     public void onEnable()
     {
-        menuStarMeta.setDisplayName(ChatColor.DARK_PURPLE + "MENU");
+        menuStarMeta.displayName(Component.text(ChatColor.DARK_PURPLE + "MENU"));
         menuStar.setItemMeta(this.menuStarMeta);
 
         getServer().getPluginManager().registerEvents(new playerJoinAndQuitEvent(), this);
         getServer().getPluginManager().registerEvents(new messagesEvent(), this);
         getServer().getPluginManager().registerEvents(new inventoriesEvents(), this);
         getServer().getPluginManager().registerEvents(new interactsEvents(), this);
-
-        getCommand("b0t").setExecutor(new b0tCommands());
     }
-    
-    public static main getPlugin() {return instance;}
 }

@@ -1,5 +1,6 @@
 package org.thePlaceholder.epheria.events;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.entity.Player;
@@ -19,7 +20,7 @@ import static org.bukkit.Bukkit.getServer;
 public class playerJoinAndQuitEvent implements Listener
 {
     @EventHandler
-    public void playerJoin(PlayerJoinEvent event) throws InterruptedException, IOException {
+    public void playerJoin(PlayerJoinEvent event) throws IOException {
         Player player = event.getPlayer();
         String playerName = player.getName();
         String plus = ChatColor.WHITE + "[" + ChatColor.GREEN + "+" + ChatColor.WHITE + "]";
@@ -27,20 +28,22 @@ public class playerJoinAndQuitEvent implements Listener
 
         if (!player.hasPlayedBefore())
         {
-            event.setJoinMessage(plus + " It's " + playerPrefix + " " + playerName + " first time on the server.");
+            event.joinMessage(Component.text(plus + " It's " + playerPrefix + " " + playerName + " first time on the server."));
             moneyManager.add(player,25);
             player.sendMessage(ChatColor.DARK_PURPLE + "" + ChatColor.MAGIC + "Leaziurd" + ChatColor.RESET + ChatColor.WHITE + " sent you " + ChatColor.RESET + ChatColor.DARK_PURPLE + " 25.0EPH");
         }
         else
         {
-            event.setJoinMessage(plus + " " + playerPrefix + " " + playerName);
+            event.joinMessage(Component.text(plus + " " + playerPrefix + " " + playerName));
         }
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
 
         player.getInventory().setItem(17, main.menuStar);
 
         BukkitScheduler tabUpdate = getServer().getScheduler();
-        tabUpdate.scheduleSyncRepeatingTask(main.getPlugin(), () -> player.setPlayerListHeader(" ⏳ | " + playerPrefix + " " + playerName + ChatColor.RESET +" | " + PlaceholderAPI.setPlaceholders(player,"%server_online%") + "/16 | " + PlaceholderAPI.setPlaceholders(player, "%server_tps_1%") + " TPS | " + PlaceholderAPI.setPlaceholders(player, "%vault_eco_balance%") + " EPH |  ⏳ "),0L,100L);
+        tabUpdate.scheduleSyncRepeatingTask(main.instance, () ->
+                        player.sendPlayerListHeader(Component.text(" ⏳ | " + playerPrefix + " " + playerName + ChatColor.RESET +" | " + PlaceholderAPI.setPlaceholders(player,"%server_online%") + "/16 | " + PlaceholderAPI.setPlaceholders(player, "%server_tps_1%") + " TPS | " + PlaceholderAPI.setPlaceholders(player, "%vault_eco_balance%") + " EPH |  ⏳ ")),
+                0L,100L);
     }
     
     @EventHandler
@@ -50,6 +53,6 @@ public class playerJoinAndQuitEvent implements Listener
         String playerName = player.getName();
         String minus = ChatColor.WHITE + "[" + ChatColor.RED + "-" + ChatColor.WHITE + "]";
         String playerPrefix = PlaceholderAPI.setPlaceholders(player, "%luckperms_prefix%");
-        event.setQuitMessage(minus + " " + playerPrefix + " " + playerName);
+        event.quitMessage(Component.text(minus + " " + playerPrefix + " " + playerName));
     }
 }
