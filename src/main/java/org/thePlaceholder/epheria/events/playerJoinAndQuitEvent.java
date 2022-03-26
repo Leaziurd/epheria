@@ -2,24 +2,24 @@ package org.thePlaceholder.epheria.events;
 
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.EventHandler;
-import org.bukkit.scheduler.BukkitScheduler;
-import net.milkbowl.vault.economy.Economy;
 import org.bukkit.entity.Player;
-import org.bukkit.Bukkit;
 import org.bukkit.Sound;
+import org.bukkit.scheduler.BukkitScheduler;
+import org.thePlaceholder.epheria.data.moneyManager;
 import org.thePlaceholder.epheria.main;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.Listener;
 
+import java.io.IOException;
+
+import static org.bukkit.Bukkit.getServer;
+
 public class playerJoinAndQuitEvent implements Listener
 {
-    Economy economy = main.economy;
-
     @EventHandler
-    public void playerJoin(PlayerJoinEvent event)
-    {
+    public void playerJoin(PlayerJoinEvent event) throws InterruptedException, IOException {
         Player player = event.getPlayer();
         String playerName = player.getName();
         String plus = ChatColor.WHITE + "[" + ChatColor.GREEN + "+" + ChatColor.WHITE + "]";
@@ -28,7 +28,7 @@ public class playerJoinAndQuitEvent implements Listener
         if (!player.hasPlayedBefore())
         {
             event.setJoinMessage(plus + " It's " + playerPrefix + " " + playerName + " first time on the server.");
-            economy.depositPlayer(player, 25.0);
+            moneyManager.add(player,25);
             player.sendMessage(ChatColor.DARK_PURPLE + "" + ChatColor.MAGIC + "Leaziurd" + ChatColor.RESET + ChatColor.WHITE + " sent you " + ChatColor.RESET + ChatColor.DARK_PURPLE + " 25.0EPH");
         }
         else
@@ -39,10 +39,8 @@ public class playerJoinAndQuitEvent implements Listener
 
         player.getInventory().setItem(17, main.menuStar);
 
-        BukkitScheduler tabUpdate = Bukkit.getServer().getScheduler();
-        tabUpdate.scheduleSyncRepeatingTask(main.getPlugin(), () -> player.setPlayerListHeader(" ⏳ | " + playerPrefix + " " + playerName + ChatColor.RESET +" | " + PlaceholderAPI.setPlaceholders(player,"%server_online%") + "/16 | " + PlaceholderAPI.setPlaceholders(player, "%server_tps_1%") + " TPS | " + PlaceholderAPI.setPlaceholders(player, "%vault_eco_balance%") + " EPH |  ⏳ "), 0L, 100L);
-        BukkitScheduler inventoryUpdate = Bukkit.getServer().getScheduler();
-        inventoryUpdate.scheduleSyncRepeatingTask(main.getPlugin(), () -> player.updateInventory(), 0L, 20L);
+        BukkitScheduler tabUpdate = getServer().getScheduler();
+        tabUpdate.scheduleSyncRepeatingTask(main.getPlugin(), () -> player.setPlayerListHeader(" ⏳ | " + playerPrefix + " " + playerName + ChatColor.RESET +" | " + PlaceholderAPI.setPlaceholders(player,"%server_online%") + "/16 | " + PlaceholderAPI.setPlaceholders(player, "%server_tps_1%") + " TPS | " + PlaceholderAPI.setPlaceholders(player, "%vault_eco_balance%") + " EPH |  ⏳ "),0L,100L);
     }
     
     @EventHandler

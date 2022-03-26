@@ -19,7 +19,7 @@ import org.bukkit.event.Listener;
 public class inventoriesEvents implements Listener
 {
     @EventHandler
-    public void inventoryClick(final InventoryClickEvent event) throws IOException {
+    public void inventoryClick(final InventoryClickEvent event) throws IOException, ClassNotFoundException {
         final HumanEntity human = event.getWhoClicked();
         final Inventory generalMenu = Bukkit.createInventory((InventoryHolder)null, 27, "MENU");
         final ItemStack enderChestIcon = new ItemStack(Material.ENDER_CHEST);
