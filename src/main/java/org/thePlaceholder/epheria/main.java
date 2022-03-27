@@ -21,7 +21,7 @@ public class main extends JavaPlugin
     public void onEnable()
     {
         menuStarMeta.displayName(Component.text(ChatColor.DARK_PURPLE + "MENU"));
-        menuStar.setItemMeta(this.menuStarMeta);
+        menuStar.setItemMeta(menuStarMeta);
 
         getServer().getPluginManager().registerEvents(new playerJoinAndQuitEvent(), this);
         getServer().getPluginManager().registerEvents(new messagesEvent(), this);
