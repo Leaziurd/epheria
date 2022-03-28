@@ -1,6 +1,7 @@
 package org.thePlaceholder.epheria.events;
 
 import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.entity.Player;
@@ -40,10 +41,14 @@ public class playerJoinAndQuitEvent implements Listener
 
         player.getInventory().setItem(17, main.menuStar);
 
-        BukkitScheduler tabUpdate = getServer().getScheduler();
-        tabUpdate.scheduleSyncRepeatingTask(main.instance, () ->
-                        player.sendPlayerListHeader(Component.text(" ⏳ | " + playerPrefix + " " + playerName + ChatColor.RESET +" | " + PlaceholderAPI.setPlaceholders(player,"%server_online%") + "/16 | " + PlaceholderAPI.setPlaceholders(player, "%server_tps_1%") + " TPS | " + PlaceholderAPI.setPlaceholders(player, "%vault_eco_balance%") + " EPH |  ⏳ ")),
-                0L,100L);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(main.instance, new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                player.sendPlayerListHeader(Component.text(PlaceholderAPI.setPlaceholders(player, " ⏳ | " + playerPrefix + " " + playerName + ChatColor.RESET +" | " + "%server_online%" + "/16 | " + "%server_tps_1%" + " TPS | " + "%vault_eco_balance%" + " EPH |  ⏳ ")));
+            }
+        }, 0L, 40L);
     }
     
     @EventHandler
