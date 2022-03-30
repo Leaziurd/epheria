@@ -2,10 +2,11 @@ package org.thePlaceholder.epheria;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
-import org.bukkit.plugin.Plugin;
+import org.thePlaceholder.epheria.customs.playerChat;
+import org.thePlaceholder.epheria.customs.playerDeath;
+import org.thePlaceholder.epheria.customs.playerJoin;
 import org.thePlaceholder.epheria.events.interactsEvents;
 import org.thePlaceholder.epheria.events.inventoriesEvents;
-import org.thePlaceholder.epheria.events.messagesEvent;
 import org.thePlaceholder.epheria.events.playerJoinAndQuitEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -25,7 +26,9 @@ public class main extends JavaPlugin
         menuStar.setItemMeta(menuStarMeta);
 
         getServer().getPluginManager().registerEvents(new playerJoinAndQuitEvent(), this);
-        getServer().getPluginManager().registerEvents(new messagesEvent(), this);
+        getServer().getPluginManager().registerEvents(new playerChat(), this);
+        getServer().getPluginManager().registerEvents(new playerDeath(), this);
+        getServer().getPluginManager().registerEvents(new playerJoin(), this);
         getServer().getPluginManager().registerEvents(new inventoriesEvents(), this);
         getServer().getPluginManager().registerEvents(new interactsEvents(), this);
 
