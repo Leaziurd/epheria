@@ -2,7 +2,7 @@ package org.thePlaceholder.epheria.events;
 
 import org.bukkit.event.EventHandler;
 import java.io.IOException;
-import org.thePlaceholder.epheria.data.customEnderChest;
+import org.thePlaceholder.epheria.menus.customEnderChest;
 import org.bukkit.Material;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;

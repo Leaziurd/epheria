@@ -1,4 +1,4 @@
-package org.thePlaceholder.epheria.data;
+package org.thePlaceholder.epheria.menus;
 
 import java.io.IOException;
 
@@ -8,6 +8,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
+import org.thePlaceholder.epheria.data.dataManager;
+import org.thePlaceholder.epheria.data.inventory2string;
 
 public class customEnderChest
 {

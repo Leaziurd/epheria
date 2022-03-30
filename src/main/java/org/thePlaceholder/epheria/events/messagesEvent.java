@@ -2,6 +2,8 @@ package org.thePlaceholder.epheria.events;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.Bukkit;
 import org.thePlaceholder.epheria.data.moneyManager;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.EventHandler;
@@ -16,7 +18,10 @@ public class messagesEvent implements Listener
     @EventHandler
     public void playerMessage(AsyncChatEvent event)
     {
-        event.message(Component.text(PlaceholderAPI.setPlaceholders(event.getPlayer(), "%luckperms_prefix%") + " " + event.getPlayer().getName() + " : " + ChatColor.WHITE + event.originalMessage()));
+        event.setCancelled(true);
+
+        String message = PlainTextComponentSerializer.plainText().serialize(event.originalMessage());
+        Bukkit.getServer().sendMessage(Component.text(PlaceholderAPI.setPlaceholders(event.getPlayer(), "%luckperms_prefix% " + event.getPlayer().getName() + " : " + ChatColor.WHITE + message)));
     }
     
     @EventHandler

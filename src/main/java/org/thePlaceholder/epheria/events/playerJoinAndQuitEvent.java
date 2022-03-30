@@ -6,7 +6,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.Sound;
-import org.bukkit.scheduler.BukkitScheduler;
 import org.thePlaceholder.epheria.data.moneyManager;
 import org.thePlaceholder.epheria.main;
 import me.clip.placeholderapi.PlaceholderAPI;
@@ -15,8 +14,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.Listener;
 
 import java.io.IOException;
-
-import static org.bukkit.Bukkit.getServer;
 
 public class playerJoinAndQuitEvent implements Listener
 {
@@ -41,12 +38,12 @@ public class playerJoinAndQuitEvent implements Listener
 
         player.getInventory().setItem(17, main.menuStar);
 
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(main.instance, new Runnable()
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(main.getInstance(), new Runnable()
         {
             @Override
             public void run()
             {
-                player.sendPlayerListHeader(Component.text(PlaceholderAPI.setPlaceholders(player, " ⏳ | " + playerPrefix + " " + playerName + ChatColor.RESET +" | " + "%server_online%" + "/16 | " + "%server_tps_1%" + " TPS | " + "%vault_eco_balance%" + " EPH |  ⏳ ")));
+                player.sendPlayerListHeader(Component.text(PlaceholderAPI.setPlaceholders(player, " ⏳ | " + playerPrefix + " " + playerName + ChatColor.RESET +" | " + "%server_online%" + "/16 | " + "%server_tps_1%" + " TPS | " + moneyManager.get(player) + " EPH |  ⏳ ")));
             }
         }, 0L, 40L);
     }

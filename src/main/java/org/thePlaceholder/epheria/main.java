@@ -2,6 +2,7 @@ package org.thePlaceholder.epheria;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
+import org.bukkit.plugin.Plugin;
 import org.thePlaceholder.epheria.events.interactsEvents;
 import org.thePlaceholder.epheria.events.inventoriesEvents;
 import org.thePlaceholder.epheria.events.messagesEvent;
@@ -27,5 +28,9 @@ public class main extends JavaPlugin
         getServer().getPluginManager().registerEvents(new messagesEvent(), this);
         getServer().getPluginManager().registerEvents(new inventoriesEvents(), this);
         getServer().getPluginManager().registerEvents(new interactsEvents(), this);
+
+        instance = this;
     }
+
+    public static main getInstance() {return instance;}
 }
