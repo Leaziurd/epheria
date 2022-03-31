@@ -1,17 +1,14 @@
-package org.thePlaceholder.epheria.events;
+package org.thePlaceholder.epheria.generators;
 
 import net.kyori.adventure.text.Component;
-
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.EventHandler;
-import org.bukkit.entity.Player;import org.bukkit.ChatColor;
-import org.bukkit.event.Listener;
 import org.thePlaceholder.epheria.data.prefix;
 
-public class playerJoinAndQuitEvent implements Listener
+public class playerQuitMessage
 {
-    @EventHandler
-    public void playerQuit(PlayerQuitEvent event)
+    public static void quitMessage(PlayerQuitEvent event)
     {
         Player player = event.getPlayer();
         String playerName = player.getName();

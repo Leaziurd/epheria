@@ -1,22 +1,18 @@
-package org.thePlaceholder.epheria.customs;
+package org.thePlaceholder.epheria.generators;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.thePlaceholder.epheria.data.moneyManager;
 import org.thePlaceholder.epheria.data.prefix;
-import org.thePlaceholder.epheria.main;
 
 import java.io.IOException;
 
-public class playerJoin implements Listener
+public class playerJoinMessage
 {
-    @EventHandler
-    public void playerJoin(PlayerJoinEvent event) throws IOException {
+    public static void joinMessage(PlayerJoinEvent event) throws IOException
+    {
         Player player = event.getPlayer();
         String playerName = player.getName();
         String plus = ChatColor.WHITE + "[" + ChatColor.GREEN + "+" + ChatColor.WHITE + "]";
@@ -31,10 +27,5 @@ public class playerJoin implements Listener
         {
             event.joinMessage(Component.text(plus + " " + prefix.get(player) + " " + playerName));
         }
-        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
-
-        player.getInventory().setItem(17, main.menuStar);
-
-        tab.set(player);
     }
 }

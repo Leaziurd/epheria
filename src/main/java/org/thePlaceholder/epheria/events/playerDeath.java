@@ -1,4 +1,4 @@
-package org.thePlaceholder.epheria.customs;
+package org.thePlaceholder.epheria.events;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;

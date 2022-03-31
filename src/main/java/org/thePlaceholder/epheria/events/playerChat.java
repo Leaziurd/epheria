@@ -1,4 +1,4 @@
-package org.thePlaceholder.epheria.customs;
+package org.thePlaceholder.epheria.events;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
