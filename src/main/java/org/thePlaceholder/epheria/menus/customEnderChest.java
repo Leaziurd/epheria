@@ -4,14 +4,23 @@ import java.io.IOException;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.thePlaceholder.epheria.data.dataManager;
 import org.thePlaceholder.epheria.data.inventory2string;
 
-public class customEnderChest
+public class customEnderChest implements Listener
 {
     private static Inventory customEnderChest;
     
@@ -35,5 +44,37 @@ public class customEnderChest
     public static void set(final HumanEntity human) throws IOException {
         final String base64Inventory = inventory2string.toBase64(customEnderChest);
         dataManager.setData((Player)human, "customEnderChest", base64Inventory);
+    }
+
+    public static void getItem(Inventory inv, Integer slot){
+        ItemStack enderChestIcon = new ItemStack(Material.ENDER_CHEST);
+        ItemMeta enderChestIconMeta = enderChestIcon.getItemMeta();
+        enderChestIconMeta.displayName(Component.text(ChatColor.YELLOW + "Ender Chest"));
+        enderChestIcon.setItemMeta(enderChestIconMeta);
+        inv.setItem(slot, enderChestIcon);
+    }
+
+    @EventHandler
+    public void inventoryClose(InventoryCloseEvent event) throws IOException
+    {
+        if(event.getInventory() == customEnderChest)
+        {
+            set(event.getPlayer());
+        }
+    }
+
+    @EventHandler
+    public void interactions(PlayerInteractEvent event) throws IOException, ClassNotFoundException {
+
+        if (event.getClickedBlock().getType() == Material.ENDER_CHEST && event.getAction() == Action.RIGHT_CLICK_BLOCK)
+        {
+            if(event.getPlayer().isSneaking())
+            {
+                if(event.getPlayer().getActiveItem() == new ItemStack(Material.AIR)) open(event.getPlayer());
+                else event.setCancelled(true);
+            }
+            else open(event.getPlayer());
+            event.setCancelled(true);
+        }
     }
 }
