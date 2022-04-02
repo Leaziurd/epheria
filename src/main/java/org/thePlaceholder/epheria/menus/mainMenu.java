@@ -5,11 +5,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -23,16 +24,20 @@ public class mainMenu implements Listener
         HumanEntity human = event.getWhoClicked();
         Inventory generalMenu = Bukkit.createInventory(null, 9, Component.text("MENU"));
         ItemStack customEnderChestItem = customEnderChest.getItem();
+        ItemStack clickedItem = event.getCurrentItem();
 
+        generalMenu.setItem(4, customEnderChestItem);
 
-        generalMenu.setItem(11, customEnderChestItem);
+        if(clickedItem == null) return;
 
-        if(event.getCurrentItem() == generateMenuStar())
+        if(clickedItem.isSimilar(generateMenuStar()))
         {
             event.setCancelled(true);
             human.openInventory(generalMenu);
         }
-        if(event.getCurrentItem() == customEnderChestItem) {
+
+        if(clickedItem.isSimilar(customEnderChestItem))
+        {
             event.setCancelled(true);
             customEnderChest.open(human);
         }
@@ -41,8 +46,11 @@ public class mainMenu implements Listener
     @EventHandler
     public void inventoryOpen(final InventoryOpenEvent event)
     {
-        final HumanEntity human = event.getPlayer();
-        human.setItemOnCursor(new ItemStack(Material.AIR));
+        HumanEntity human = event.getPlayer();
+        Player player = (Player) human;
+
+        human.setItemOnCursor(null);
+        player.updateInventory();
     }
 
     public static ItemStack generateMenuStar()
@@ -53,5 +61,14 @@ public class mainMenu implements Listener
         menuStar.setItemMeta(menuStarMeta);
 
         return menuStar;
+    }
+
+    @EventHandler
+    public void onItemDrop(PlayerDropItemEvent event)
+    {
+        if (event.getItemDrop().getItemStack().isSimilar(generateMenuStar()))
+        {
+            event.setCancelled(true);
+        }
     }
 }
