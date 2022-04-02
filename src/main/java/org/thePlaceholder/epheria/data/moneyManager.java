@@ -19,8 +19,9 @@ public class moneyManager
         }
     }
 
-    public static Integer get(Player player){
+    public static double get(Player player){
         Integer amount = (Integer) dataManager.getData(player, "money");
+        if(amount == null) return 0.00;
         return amount;
     }
 }

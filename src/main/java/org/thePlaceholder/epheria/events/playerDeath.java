@@ -15,7 +15,7 @@ public class playerDeath implements Listener
     @EventHandler
     public void playerDeathEvent(final PlayerDeathEvent event) throws IOException
     {
-        Integer account = moneyManager.get(event.getPlayer());
+        double account = moneyManager.get(event.getPlayer());
         double lostMoney = - account - account % 20.0;
         moneyManager.add(event.getEntity(), (int) lostMoney);
 

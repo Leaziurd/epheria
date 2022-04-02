@@ -25,7 +25,7 @@ public class playerRepeating
             @Override
             public void run()
             {
-                player.sendPlayerListHeader(Component.text(" ⏳ | " + playerPrefix + " " + playerName + ChatColor.RESET +" | " + Bukkit.getServer().getOnlinePlayers().size() + "/16 | " + tps.get() + " TPS | " + moneyManager.get(player) + " EPH |  ⏳ "));
+                player.sendPlayerListHeader(Component.text(" ⏳ | " + playerPrefix + " " + playerName + ChatColor.RESET +" | " + Bukkit.getServer().getOnlinePlayers().size() + "/16 | " + tps.getTPS() + " TPS | " + moneyManager.get(player) + " EPH |  ⏳ "));
                 player.getInventory().setItem(17, mainMenu.generateMenuStar());
             }
         }, 0L, 40L);

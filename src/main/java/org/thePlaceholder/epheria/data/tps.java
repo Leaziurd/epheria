@@ -1,37 +1,48 @@
 package org.thePlaceholder.epheria.data;
 
-import org.bukkit.Bukkit;
-import org.thePlaceholder.epheria.main;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
-public class tps
+public class tps implements Runnable
 {
-    private static Integer tps;
+    public static int TICK_COUNT= 0;
+    public static long[] TICKS= new long[600];
+    public static long LAST_TICK= 0L;
 
-    public static void run(){
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(main.getInstance(), new Runnable()
-        {
-            long sec;
-            long currentSec;
-            int ticks;
-
-            @Override
-            public void run()
-            {
-                sec = (System.currentTimeMillis() / 1000);
-
-                if (currentSec == sec) {
-                    ticks++;
-                } else {
-                    currentSec = sec;
-                    tps = (tps == 0 ? ticks : ((tps + ticks) / 2));
-                    ticks = 0;
-                }
-            }
-        }, 0, 1);
+    public static String getTPS()
+    {
+        return getTPS(100);
     }
 
-    public static Integer get()
+    public static String getTPS(int ticks)
     {
-        return tps;
+        if (TICK_COUNT< ticks) {
+            return String.valueOf(20.0D);
+        }
+        int target = (TICK_COUNT- 1 - ticks) % TICKS.length;
+        long elapsed = System.currentTimeMillis() - TICKS[target];
+
+        DecimalFormat df = new DecimalFormat("#.#");
+        df.setRoundingMode(RoundingMode.CEILING);
+
+        if (ticks / (elapsed / 1000.0D) >= 20D) return "20";
+        else return df.format(ticks / (elapsed / 1000.0D));
+    }
+
+    public static long getElapsed(int tickID)
+    {
+        if (TICK_COUNT- tickID >= TICKS.length)
+        {
+        }
+
+        long time = TICKS[(tickID % TICKS.length)];
+        return System.currentTimeMillis() - time;
+    }
+
+    public void run()
+    {
+        TICKS[(TICK_COUNT% TICKS.length)] = System.currentTimeMillis();
+
+        TICK_COUNT+= 1;
     }
 }

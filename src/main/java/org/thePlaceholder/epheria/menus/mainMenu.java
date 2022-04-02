@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -17,18 +18,24 @@ import java.io.IOException;
 
 public class mainMenu implements Listener
 {
-
-
     @EventHandler
     public void inventoryClick(InventoryClickEvent event) throws IOException, ClassNotFoundException {
         HumanEntity human = event.getWhoClicked();
-        Inventory generalMenu = Bukkit.createInventory(null, 27, Component.text("MENU"));
+        Inventory generalMenu = Bukkit.createInventory(null, 9, Component.text("MENU"));
+        ItemStack customEnderChestItem = customEnderChest.getItem();
 
-        customEnderChest.getItem(generalMenu,11);
 
-        if(event.getSlot() == 17 && event.getInventory() == human.getInventory()) human.openInventory(generalMenu);
+        generalMenu.setItem(11, customEnderChestItem);
 
-        if(event.getSlot() == 11 && event.getInventory() == generalMenu) customEnderChest.open(human);
+        if(event.getCurrentItem() == generateMenuStar())
+        {
+            event.setCancelled(true);
+            human.openInventory(generalMenu);
+        }
+        if(event.getCurrentItem() == customEnderChestItem) {
+            event.setCancelled(true);
+            customEnderChest.open(human);
+        }
     }
 
     @EventHandler

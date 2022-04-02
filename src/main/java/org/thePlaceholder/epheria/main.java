@@ -1,5 +1,6 @@
 package org.thePlaceholder.epheria;
 
+import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 import org.thePlaceholder.epheria.data.tps;
 import org.thePlaceholder.epheria.events.playerChat;
@@ -26,8 +27,9 @@ public class main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new mainMenu(), this);
         getServer().getPluginManager().registerEvents(new customEnderChest(), this);
 
-        tps.run();
         instance = this;
+
+        Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new tps(), 100L, 1L);
     }
 
     public static main getInstance() {return instance;}

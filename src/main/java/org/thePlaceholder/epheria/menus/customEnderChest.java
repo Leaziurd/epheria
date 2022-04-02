@@ -33,7 +33,7 @@ public class customEnderChest implements Listener
         }
         else
         {
-            customEnderChest = Bukkit.createInventory(human, InventoryType.CHEST, Component.text("Ender Chest"));
+            customEnderChest = Bukkit.createInventory(human, 54 , Component.text("Ender Chest"));
             String base64Inventory = inventory2string.toBase64(customEnderChest);
             dataManager.setData((Player)human, "customEnderChest", base64Inventory);
             customEnderChest = inventory2string.fromBase64(base64Inventory);
@@ -46,12 +46,12 @@ public class customEnderChest implements Listener
         dataManager.setData((Player)human, "customEnderChest", base64Inventory);
     }
 
-    public static void getItem(Inventory inv, Integer slot){
+    public static ItemStack getItem(){
         ItemStack enderChestIcon = new ItemStack(Material.ENDER_CHEST);
         ItemMeta enderChestIconMeta = enderChestIcon.getItemMeta();
         enderChestIconMeta.displayName(Component.text(ChatColor.YELLOW + "Ender Chest"));
         enderChestIcon.setItemMeta(enderChestIconMeta);
-        inv.setItem(slot, enderChestIcon);
+        return enderChestIcon;
     }
 
     @EventHandler
