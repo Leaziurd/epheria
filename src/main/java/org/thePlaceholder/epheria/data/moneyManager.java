@@ -6,7 +6,8 @@ import java.io.IOException;
 
 public class moneyManager
 {
-    public static void add(Player player, Integer integer) throws IOException {
+    public static void add(Player player, Integer integer) throws IOException
+    {
         Integer money = (Integer) dataManager.getData(player, "money");
 
         if(money == null)
@@ -19,7 +20,8 @@ public class moneyManager
         }
     }
 
-    public static double get(Player player){
+    public static double get(Player player)
+    {
         Integer amount = (Integer) dataManager.getData(player, "money");
         if(amount == null) return 0.00;
         return amount;
