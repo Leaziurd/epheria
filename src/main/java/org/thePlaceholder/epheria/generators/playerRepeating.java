@@ -16,6 +16,8 @@ public class playerRepeating
         String playerName = player.getName();
         String playerPrefix = prefix.get(player);
 
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(main.getInstance(), () -> player.sendPlayerListHeader(Component.text(" ⏳ | " + playerPrefix + " " + playerName + ChatColor.RESET +" | " + Bukkit.getServer().getOnlinePlayers().size() + "/16 | " + tps.getTPS() + " TPS | " + moneyManager.get(player) + " EPH |  ⏳ ")), 0L, 40L);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(main.getInstance(), () ->
+                player.sendPlayerListHeader(Component.text(" ⏳ | " + playerPrefix + " " + playerName + ChatColor.RESET +" | " + Bukkit.getServer().getOnlinePlayers().size() + "/16 | " + tps.getTPS() + " TPS | " + moneyManager.get(player) + " EPH |  ⏳ ")),
+        0L, 40L);
     }
 }
