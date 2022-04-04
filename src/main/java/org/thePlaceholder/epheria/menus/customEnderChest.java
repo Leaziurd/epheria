@@ -27,7 +27,7 @@ public class customEnderChest implements Listener
         if(dataManager.getData((Player) human, "customEnderChest") != null)
         {
             String base64Inventory = (String) dataManager.getData((Player) human, "customEnderChest");
-            customEnderChest = inventory2string.fromBase64(base64Inventory);
+            customEnderChest = inventory2string.fromBase64(base64Inventory, "Ender Chest");
             human.openInventory(customEnderChest);
         }
         else
@@ -35,7 +35,7 @@ public class customEnderChest implements Listener
             customEnderChest = Bukkit.createInventory(human, 54 , Component.text("Ender Chest"));
             String base64Inventory = inventory2string.toBase64(customEnderChest);
             dataManager.setData((Player)human, "customEnderChest", base64Inventory);
-            customEnderChest = inventory2string.fromBase64(base64Inventory);
+            customEnderChest = inventory2string.fromBase64(base64Inventory, "Ender Chest");
             human.openInventory(customEnderChest);
         }
     }

@@ -1,6 +1,8 @@
 package org.thePlaceholder.epheria.data;
 
 import java.io.IOException;
+
+import net.kyori.adventure.text.Component;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Bukkit;
 import org.bukkit.util.io.BukkitObjectInputStream;
@@ -26,10 +28,10 @@ public class inventory2string
         return Base64Coder.encodeLines(outputStream.toByteArray());
     }
 
-    public static Inventory fromBase64(String data) throws IOException, ClassNotFoundException {
+    public static Inventory fromBase64(String data, String invName) throws IOException, ClassNotFoundException {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
         BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
-        Inventory inventory = Bukkit.getServer().createInventory(null, dataInput.readInt());
+        Inventory inventory = Bukkit.getServer().createInventory(null, dataInput.readInt(), Component.text(invName));
 
         for (int i = 0; i < inventory.getSize(); i++) {
             inventory.setItem(i, (ItemStack) dataInput.readObject());

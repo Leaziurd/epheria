@@ -16,9 +16,15 @@ public class playerDeath implements Listener
     public void playerDeathEvent(final PlayerDeathEvent event) throws IOException
     {
         double account = moneyManager.get(event.getPlayer());
-        double lostMoney = - account - (account % 20.0);
-        moneyManager.add(event.getEntity(), (int) lostMoney);
-
-        event.deathMessage(Component.text(prefix.get(event.getPlayer()) + " " + event.getEntity().getName() + ChatColor.WHITE + " died and lost " + ChatColor.DARK_PURPLE + lostMoney + " EPH"));
+        if(account > 0)
+        {
+            double lostMoney = - account - (account % 20.0);
+            moneyManager.add(event.getEntity(), (int) lostMoney);
+            event.deathMessage(Component.text(prefix.get(event.getPlayer()) + " " + event.getEntity().getName() + ChatColor.WHITE + " died and lost " + ChatColor.DARK_PURPLE + lostMoney + " EPH"));
+        }
+        else
+        {
+            event.deathMessage(Component.text(prefix.get(event.getPlayer()) + " " + event.getEntity().getName() + ChatColor.WHITE + " died"));
+        }
     }
 }
