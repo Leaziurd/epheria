@@ -6,3 +6,4 @@ authors: [thePlaceholder]
 permissions:
   epheria.op:
     default: op
+load: STARTUP

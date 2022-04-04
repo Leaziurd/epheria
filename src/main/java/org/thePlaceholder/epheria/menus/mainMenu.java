@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,6 +23,7 @@ public class mainMenu implements Listener
     @EventHandler
     public void inventoryClick(InventoryClickEvent event) throws IOException, ClassNotFoundException {
         HumanEntity human = event.getWhoClicked();
+        Player player = (Player) event.getWhoClicked();
         Inventory generalMenu = Bukkit.createInventory(null, 9, Component.text("MENU"));
         ItemStack customEnderChestItem = customEnderChest.getItem();
         ItemStack clickedItem = event.getCurrentItem();
@@ -34,13 +36,20 @@ public class mainMenu implements Listener
         {
             event.setCancelled(true);
             human.openInventory(generalMenu);
+            human.getInventory().removeItem(mainMenu.generateMenuStar());
+            human.getInventory().setItem(17, mainMenu.generateMenuStar());
+            player.updateInventory();
+            player.playSound(human.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
         }
 
         if(clickedItem.isSimilar(customEnderChestItem))
         {
             event.setCancelled(true);
             customEnderChest.open(human);
+            player.playSound(human.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
         }
+
+
     }
 
     @EventHandler

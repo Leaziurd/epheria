@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.thePlaceholder.epheria.data.moneyManager;
 import org.thePlaceholder.epheria.data.prefix;
+import org.thePlaceholder.epheria.menus.mainMenu;
 
 import java.io.IOException;
 
@@ -27,5 +28,6 @@ public class playerJoinMessage
         {
             event.joinMessage(Component.text(plus + " " + prefix.get(player) + " " + playerName));
         }
+        player.getInventory().setItem(17, mainMenu.generateMenuStar());
     }
 }
