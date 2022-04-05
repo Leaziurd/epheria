@@ -1,6 +1,7 @@
 package org.thePlaceholder.epheria.menus;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -65,11 +66,11 @@ public class customEnderChest implements Listener
     @EventHandler
     public void interactions(PlayerInteractEvent event) throws IOException, ClassNotFoundException {
 
-        if (event.getClickedBlock().getType() == Material.ENDER_CHEST && event.getAction() == Action.RIGHT_CLICK_BLOCK)
+        if (Objects.requireNonNull(event.getClickedBlock()).getType() == Material.ENDER_CHEST && event.getAction() == Action.RIGHT_CLICK_BLOCK)
         {
             if(event.getPlayer().isSneaking())
             {
-                if(event.getPlayer().getActiveItem() == new ItemStack(Material.AIR)) open(event.getPlayer());
+                if(Objects.equals(event.getPlayer().getActiveItem(), new ItemStack(Material.AIR))) open(event.getPlayer());
                 else event.setCancelled(true);
             }
             else open(event.getPlayer());

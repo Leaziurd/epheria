@@ -6,7 +6,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.thePlaceholder.epheria.data.moneyManager;
 import org.thePlaceholder.epheria.data.prefix;
-import org.thePlaceholder.epheria.data.tps;
 import org.thePlaceholder.epheria.main;
 
 public class playerRepeating
@@ -17,7 +16,7 @@ public class playerRepeating
         String playerPrefix = prefix.get(player);
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(main.getInstance(), () ->
-                player.sendPlayerListHeader(Component.text(" ⏳ | " + playerPrefix + " " + playerName + ChatColor.RESET +" | " + Bukkit.getServer().getOnlinePlayers().size() + "/16 | " + tps.getTPS() + " TPS | " + moneyManager.get(player) + " EPH |  ⏳ ")),
+                player.sendPlayerListHeader(Component.text(" ⏳ | " + playerPrefix + " " + playerName + ChatColor.RESET +" | " + Bukkit.getServer().getOnlinePlayers().size() + "/16 | " + Bukkit.getTPS()[0] + " TPS | " + moneyManager.get(player) + " EPH |  ⏳ ")),
         0L, 40L);
     }
 }
