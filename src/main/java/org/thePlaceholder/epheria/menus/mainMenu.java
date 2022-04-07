@@ -46,7 +46,6 @@ public class mainMenu implements Listener
         {
             event.setCancelled(true);
             customEnderChest.open(human);
-            player.playSound(human.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
         }
 
 

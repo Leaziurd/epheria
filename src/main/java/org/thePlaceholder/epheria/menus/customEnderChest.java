@@ -7,6 +7,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
@@ -25,7 +26,11 @@ public class customEnderChest implements Listener
     private static Inventory customEnderChest;
     
     public static void open(HumanEntity human) throws IOException, ClassNotFoundException {
-        if(dataManager.getData((Player) human, "customEnderChest") != null)
+
+        Player player = (Player) human;
+        player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_OPEN, 1f, 1f);
+
+        if(dataManager.getData(player, "customEnderChest") != null)
         {
             String base64Inventory = (String) dataManager.getData((Player) human, "customEnderChest");
             customEnderChest = inventory2string.fromBase64(base64Inventory, "Ender Chest");
@@ -35,7 +40,7 @@ public class customEnderChest implements Listener
         {
             customEnderChest = Bukkit.createInventory(human, 54 , Component.text("Ender Chest"));
             String base64Inventory = inventory2string.toBase64(customEnderChest);
-            dataManager.setData((Player)human, "customEnderChest", base64Inventory);
+            dataManager.setData(player, "customEnderChest", base64Inventory);
             customEnderChest = inventory2string.fromBase64(base64Inventory, "Ender Chest");
             human.openInventory(customEnderChest);
         }
@@ -59,6 +64,9 @@ public class customEnderChest implements Listener
     {
         if(event.getInventory() == customEnderChest)
         {
+            Player player = (Player) event.getPlayer();
+            player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_OPEN, 1f, 1f);
+
             set(event.getPlayer());
         }
     }

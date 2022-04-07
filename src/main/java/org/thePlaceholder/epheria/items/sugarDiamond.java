@@ -33,7 +33,8 @@ public class sugarDiamond implements Listener
     public static void recipe()
     {
         ShapelessRecipe recipe = new ShapelessRecipe(NamespacedKey.minecraft("sugar_diamond"), item());
-        recipe.addIngredient(1, Material.SUGAR).addIngredient(1, Material.DIAMOND);
+        recipe.addIngredient(1, vanillaItems.sugar);
+        recipe.addIngredient(1, vanillaItems.diamond);
 
         Bukkit.getServer().addRecipe(recipe);
     }

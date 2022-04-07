@@ -1,9 +1,10 @@
 name: "epheria"
 version: "0.1.0"
-main: "org.thePlaceholder.epheria.main"
+main: "org.thePlaceholder.epheria.epheria"
 api-version: 1.13
 authors: [thePlaceholder]
+load: STARTUP
+
 permissions:
   epheria.op:
     default: op
-load: STARTUP
