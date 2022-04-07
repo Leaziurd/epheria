@@ -27,6 +27,7 @@ public class sugarDiamond implements Listener
         meta.displayName(Component.text(ChatColor.BLUE + "Sugar Diamond"));
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addEnchant(Enchantment.MENDING, 1, true);
+        meta.setCustomModelData(128);
 
         item.setItemMeta(meta);
 

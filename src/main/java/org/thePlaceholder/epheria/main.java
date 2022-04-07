@@ -6,7 +6,6 @@ import org.thePlaceholder.epheria.registers.registerRecipes;
 
 public class main extends JavaPlugin
 {
-
     public static main instance;
 
     public void onEnable()

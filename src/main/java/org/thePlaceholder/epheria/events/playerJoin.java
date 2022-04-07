@@ -20,5 +20,7 @@ public class playerJoin implements Listener
         playerRepeating.run(player);
 
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
+
+        player.setResourcePack("https://www.dropbox.com/s/kor3tr9cteq2hw1/epheria.zip?dl=1","d3970b31e44de70dfedd47827dbc92b9d438cc7e");
     }
 }
