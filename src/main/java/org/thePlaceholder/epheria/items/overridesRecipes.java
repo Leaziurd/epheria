@@ -3,7 +3,9 @@ package org.thePlaceholder.epheria.items;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Tag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 
 public class overridesRecipes
@@ -22,12 +24,19 @@ public class overridesRecipes
 
     private static void diamond()
     {
+        ItemStack diamond = new ItemStack(Material.DIAMOND);
+        ItemStack stick = new ItemStack(Material.STICK);
+        ItemStack obsidian = new ItemStack(Material.OBSIDIAN);
+        ItemStack book = new ItemStack(Material.BOOK);
+
+        RecipeChoice plank = new RecipeChoice.MaterialChoice(Tag.PLANKS);
+
         {
             String recipeName = "diamond_block";
             remove(recipeName);
             ShapedRecipe recipe = new ShapedRecipe(NamespacedKey.minecraft(recipeName), new ItemStack(Material.DIAMOND_BLOCK));
             recipe.shape("***", "***", "***");
-            recipe.setIngredient('*', vanillaItems.diamond);
+            recipe.setIngredient('*', diamond);
             Bukkit.addRecipe(recipe);
         }
         {
@@ -35,8 +44,8 @@ public class overridesRecipes
             remove(recipeName);
             ShapedRecipe recipe = new ShapedRecipe(NamespacedKey.minecraft(recipeName), new ItemStack(Material.DIAMOND_AXE));
             recipe.shape("** ", "*# ", " # ");
-            recipe.setIngredient('*', vanillaItems.diamond);
-            recipe.setIngredient('#', vanillaItems.stick);
+            recipe.setIngredient('*', diamond);
+            recipe.setIngredient('#', stick);
             Bukkit.addRecipe(recipe);
         }
         {
@@ -44,7 +53,7 @@ public class overridesRecipes
             remove(recipeName);
             ShapedRecipe recipe = new ShapedRecipe(NamespacedKey.minecraft(recipeName), new ItemStack(Material.DIAMOND_BOOTS));
             recipe.shape("   ", "* *", "* *");
-            recipe.setIngredient('*', vanillaItems.diamond);
+            recipe.setIngredient('*', diamond);
             Bukkit.addRecipe(recipe);
         }
         {
@@ -52,7 +61,7 @@ public class overridesRecipes
             remove(recipeName);
             ShapedRecipe recipe = new ShapedRecipe(NamespacedKey.minecraft(recipeName), new ItemStack(Material.DIAMOND_CHESTPLATE));
             recipe.shape("* *", "***", "***");
-            recipe.setIngredient('*', vanillaItems.diamond);
+            recipe.setIngredient('*', diamond);
             Bukkit.addRecipe(recipe);
         }
         {
@@ -60,7 +69,7 @@ public class overridesRecipes
             remove(recipeName);
             ShapedRecipe recipe = new ShapedRecipe(NamespacedKey.minecraft(recipeName), new ItemStack(Material.DIAMOND_HELMET));
             recipe.shape("***", "* *", "   ");
-            recipe.setIngredient('*', vanillaItems.diamond);
+            recipe.setIngredient('*', diamond);
             Bukkit.addRecipe(recipe);
         }
         {
@@ -68,8 +77,8 @@ public class overridesRecipes
             remove(recipeName);
             ShapedRecipe recipe = new ShapedRecipe(NamespacedKey.minecraft(recipeName), new ItemStack(Material.DIAMOND_HOE));
             recipe.shape("** ", " # ", " # ");
-            recipe.setIngredient('*', vanillaItems.diamond);
-            recipe.setIngredient('#', vanillaItems.stick);
+            recipe.setIngredient('*', diamond);
+            recipe.setIngredient('#', stick);
             Bukkit.addRecipe(recipe);
         }
         {
@@ -77,7 +86,7 @@ public class overridesRecipes
             remove(recipeName);
             ShapedRecipe recipe = new ShapedRecipe(NamespacedKey.minecraft(recipeName), new ItemStack(Material.DIAMOND_LEGGINGS));
             recipe.shape("***", "* *", "* *");
-            recipe.setIngredient('*', vanillaItems.diamond);
+            recipe.setIngredient('*', diamond);
             Bukkit.addRecipe(recipe);
         }
         {
@@ -85,8 +94,8 @@ public class overridesRecipes
             remove(recipeName);
             ShapedRecipe recipe = new ShapedRecipe(NamespacedKey.minecraft(recipeName), new ItemStack(Material.DIAMOND_PICKAXE));
             recipe.shape("***", " # ", " # ");
-            recipe.setIngredient('*', vanillaItems.diamond);
-            recipe.setIngredient('#', vanillaItems.stick);
+            recipe.setIngredient('*', diamond);
+            recipe.setIngredient('#', stick);
             Bukkit.addRecipe(recipe);
         }
         {
@@ -94,8 +103,8 @@ public class overridesRecipes
             remove(recipeName);
             ShapedRecipe recipe = new ShapedRecipe(NamespacedKey.minecraft(recipeName), new ItemStack(Material.DIAMOND_SHOVEL));
             recipe.shape(" * ", " # ", " # ");
-            recipe.setIngredient('*', vanillaItems.diamond);
-            recipe.setIngredient('#', vanillaItems.stick);
+            recipe.setIngredient('*', diamond);
+            recipe.setIngredient('#', stick);
             Bukkit.addRecipe(recipe);
         }
         {
@@ -103,8 +112,8 @@ public class overridesRecipes
             remove(recipeName);
             ShapedRecipe recipe = new ShapedRecipe(NamespacedKey.minecraft(recipeName), new ItemStack(Material.DIAMOND_SWORD));
             recipe.shape(" * ", " * ", " # ");
-            recipe.setIngredient('*', vanillaItems.diamond);
-            recipe.setIngredient('#', vanillaItems.stick);
+            recipe.setIngredient('*', diamond);
+            recipe.setIngredient('#', stick);
             Bukkit.addRecipe(recipe);
         }
         {
@@ -112,9 +121,9 @@ public class overridesRecipes
             remove(recipeName);
             ShapedRecipe recipe = new ShapedRecipe(NamespacedKey.minecraft(recipeName), new ItemStack(Material.ENCHANTING_TABLE));
             recipe.shape(" . ", "*#*", "###");
-            recipe.setIngredient('*', vanillaItems.diamond);
-            recipe.setIngredient('#', vanillaItems.obsidian);
-            recipe.setIngredient('.', vanillaItems.book);
+            recipe.setIngredient('*', diamond);
+            recipe.setIngredient('#', obsidian);
+            recipe.setIngredient('.', book);
             Bukkit.addRecipe(recipe);
         }
         {
@@ -122,8 +131,8 @@ public class overridesRecipes
             remove(recipeName);
             ShapedRecipe recipe = new ShapedRecipe(NamespacedKey.minecraft(recipeName), new ItemStack(Material.JUKEBOX));
             recipe.shape("###", "#*#", "###");
-            recipe.setIngredient('*', vanillaItems.diamond);
-            recipe.setIngredient('#', vanillaItems.plank);
+            recipe.setIngredient('*', diamond);
+            recipe.setIngredient('#', plank);
             Bukkit.addRecipe(recipe);
         }
     }

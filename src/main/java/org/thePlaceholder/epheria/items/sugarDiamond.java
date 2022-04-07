@@ -32,9 +32,12 @@ public class sugarDiamond implements Listener
 
     public static void recipe()
     {
+        ItemStack diamond = new ItemStack(Material.DIAMOND);
+        ItemStack sugar = new ItemStack(Material.SUGAR);
+
         ShapelessRecipe recipe = new ShapelessRecipe(NamespacedKey.minecraft("sugar_diamond"), item());
-        recipe.addIngredient(1, vanillaItems.sugar);
-        recipe.addIngredient(1, vanillaItems.diamond);
+        recipe.addIngredient(1, sugar);
+        recipe.addIngredient(1, diamond);
 
         Bukkit.getServer().addRecipe(recipe);
     }
