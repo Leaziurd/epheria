@@ -1,10 +1,7 @@
 package org.thePlaceholder.epheria.items;
 
 import net.kyori.adventure.text.Component;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -30,7 +27,6 @@ public class sugarDiamond implements Listener
         meta.setCustomModelData(128);
 
         item.setItemMeta(meta);
-
         return item;
     }
 
@@ -51,6 +47,8 @@ public class sugarDiamond implements Listener
         {
             player.damage(4);
             player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1200, 10, true));
+
+            player.playSound(player, Sound.ENTITY_PLAYER_BURP, 1, 1);
 
             item.setAmount(item.getAmount() - 1);
             player.getInventory().setItem(player.getInventory().getHeldItemSlot(), item);
