@@ -15,6 +15,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.thePlaceholder.epheria.data.playerWorldManager;
 
 public class mainMenu implements Listener
 {
@@ -41,7 +42,7 @@ public class mainMenu implements Listener
         generalMenu.setItem(7, phItem);
         generalMenu.setItem(8, phItem);
 
-        if(clickedItem == null) return;
+        if(clickedItem == phItem | clickedItem == null) return;
 
         if(clickedItem.isSimilar(generateMenuStar()))
         {
@@ -61,7 +62,7 @@ public class mainMenu implements Listener
 
         if(clickedItem.isSimilar(pocketDimensionItem()))
         {
-
+            playerWorldManager.join(player);
         }
     }
 

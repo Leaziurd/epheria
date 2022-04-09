@@ -8,12 +8,10 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.thePlaceholder.epheria.data.moneyManager;
 import org.thePlaceholder.epheria.data.prefix;
 
-import java.io.IOException;
-
 public class playerDeath implements Listener
 {
     @EventHandler
-    public void playerDeathEvent(final PlayerDeathEvent event) throws IOException
+    public void playerDeathEvent(final PlayerDeathEvent event)
     {
         double account = moneyManager.get(event.getPlayer());
         if(account > 0)

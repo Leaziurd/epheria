@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.thePlaceholder.epheria.data.playerWorldManager;
 import org.thePlaceholder.epheria.data.prefix;
 import org.thePlaceholder.epheria.epheria;
 import org.thePlaceholder.epheria.menus.mainMenu;
@@ -28,5 +29,7 @@ public class spawningSequence
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
 
         player.setResourcePack("https://www.dropbox.com/s/kor3tr9cteq2hw1/epheria.zip?dl=1","d3970b31e44de70dfedd47827dbc92b9d438cc7e");
+
+        playerWorldManager.join(player);
     }
 }
