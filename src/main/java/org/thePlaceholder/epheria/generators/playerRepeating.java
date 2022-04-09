@@ -16,7 +16,7 @@ public class playerRepeating
         String playerPrefix = prefix.get(player);
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(epheria.getInstance(), () ->
-                player.sendPlayerListHeader(Component.text(" ⏳ | " + playerPrefix + " " + playerName + ChatColor.RESET +" | " + Bukkit.getServer().getOnlinePlayers().size() + "/16 | " + Bukkit.getTPS()[0] + " TPS | " + moneyManager.get(player) + " EPH |  ⏳ ")),
+            player.sendPlayerListHeader(Component.text(" ⏳ | " + playerPrefix + " " + playerName + ChatColor.RESET +" | " + Bukkit.getServer().getOnlinePlayers().size() + "/" + Bukkit.getServer().getMaxPlayers() +" | " + Math.round(Bukkit.getTPS()[0]) + " TPS | " + moneyManager.get(player) + " EPH |  ⏳ ")),
         0L, 40L);
     }
 }

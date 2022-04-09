@@ -16,19 +16,30 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.io.IOException;
-
 public class mainMenu implements Listener
 {
     @EventHandler
-    public void inventoryClick(InventoryClickEvent event) throws IOException, ClassNotFoundException {
+    public void inventoryClick(InventoryClickEvent event) throws ClassNotFoundException {
         HumanEntity human = event.getWhoClicked();
         Player player = (Player) event.getWhoClicked();
-        Inventory generalMenu = Bukkit.createInventory(null, 9, Component.text("MENU"));
+        Inventory generalMenu = Bukkit.createInventory(null, 9, Component.text("Menu"));
         ItemStack customEnderChestItem = customEnderChest.getItem();
         ItemStack clickedItem = event.getCurrentItem();
 
-        generalMenu.setItem(4, customEnderChestItem);
+        ItemStack phItem = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
+        ItemMeta phItemMeta = phItem.getItemMeta();
+        phItemMeta.displayName(Component.text(" "));
+        phItem.setItemMeta(phItemMeta);
+
+        generalMenu.setItem(0, phItem);
+        generalMenu.setItem(1, phItem);
+        generalMenu.setItem(2, phItem);
+        generalMenu.setItem(3, customEnderChestItem);
+        generalMenu.setItem(4, phItem);
+        generalMenu.setItem(5, pocketDimensionItem());
+        generalMenu.setItem(6, phItem);
+        generalMenu.setItem(7, phItem);
+        generalMenu.setItem(8, phItem);
 
         if(clickedItem == null) return;
 
@@ -48,7 +59,10 @@ public class mainMenu implements Listener
             customEnderChest.open(human);
         }
 
+        if(clickedItem.isSimilar(pocketDimensionItem()))
+        {
 
+        }
     }
 
     @EventHandler
@@ -65,7 +79,7 @@ public class mainMenu implements Listener
     {
         ItemStack menuStar = new ItemStack(Material.NETHER_STAR);
         ItemMeta menuStarMeta = menuStar.getItemMeta();
-        menuStarMeta.displayName(Component.text(ChatColor.DARK_PURPLE + "MENU"));
+        menuStarMeta.displayName(Component.text(ChatColor.DARK_PURPLE + "Menu"));
         menuStar.setItemMeta(menuStarMeta);
 
         return menuStar;
@@ -79,4 +93,15 @@ public class mainMenu implements Listener
             event.setCancelled(true);
         }
     }
+
+    public static ItemStack pocketDimensionItem()
+    {
+        ItemStack item = new ItemStack(Material.ENDER_PEARL);
+        ItemMeta meta = item.getItemMeta();
+        meta.displayName(Component.text(ChatColor.LIGHT_PURPLE + "Pocket Dimension"));
+        item.setItemMeta(meta);
+
+        return item;
+    }
+
 }

@@ -47,7 +47,7 @@ public class sugarDiamond implements Listener
     {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
-        if(item.isSimilar(item()))
+        if(item.isSimilar(item()) && event.getAction().isRightClick())
         {
             player.damage(4);
             player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1200, 10, true));

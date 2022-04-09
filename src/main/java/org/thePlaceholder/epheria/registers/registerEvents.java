@@ -22,5 +22,6 @@ public class registerEvents
         getServer().getPluginManager().registerEvents(new customEnderChest(), plugin);
         getServer().getPluginManager().registerEvents(new sugarDiamond(), plugin);
         getServer().getPluginManager().registerEvents(new playerResource(), plugin);
+        getServer().getPluginManager().registerEvents(new cancelInSpawn(), plugin);
     }
 }

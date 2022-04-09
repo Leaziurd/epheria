@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class playerJoinMessage
 {
-    public static void joinMessage(PlayerJoinEvent event) throws IOException
+    public static void joinMessage(PlayerJoinEvent event)
     {
         Player player = event.getPlayer();
         String playerName = player.getName();
@@ -28,6 +28,5 @@ public class playerJoinMessage
         {
             event.joinMessage(Component.text(plus + " " + prefix.get(player) + " " + playerName));
         }
-        player.getInventory().setItem(17, mainMenu.generateMenuStar());
     }
 }

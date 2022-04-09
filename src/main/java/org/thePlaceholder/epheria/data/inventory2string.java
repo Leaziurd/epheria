@@ -14,30 +14,42 @@ import org.bukkit.inventory.Inventory;
 
 public class inventory2string
 {
-    public static String toBase64(Inventory inventory) throws IllegalStateException, IOException {
+    public static String toBase64(Inventory inventory) throws IllegalStateException
+    {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);
 
-        dataOutput.writeInt(inventory.getSize());
+        try
+        {
+            BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);
 
-        for (int i = 0; i < inventory.getSize(); i++) {
-            dataOutput.writeObject(inventory.getItem(i));
-        }
+            dataOutput.writeInt(inventory.getSize());
 
-        dataOutput.close();
+            for (int i = 0; i < inventory.getSize(); i++) {
+                dataOutput.writeObject(inventory.getItem(i));
+            }
+
+            dataOutput.close();
+        }catch (IOException ignored){}
+
         return Base64Coder.encodeLines(outputStream.toByteArray());
     }
 
-    public static Inventory fromBase64(String data, String invName) throws IOException, ClassNotFoundException {
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
-        BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
-        Inventory inventory = Bukkit.getServer().createInventory(null, dataInput.readInt(), Component.text(invName));
+    public static Inventory fromBase64(String data, String invName) throws ClassNotFoundException
+    {
+        Inventory inventory = null;
+        try
+        {
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
+            BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
+            inventory = Bukkit.getServer().createInventory(null, dataInput.readInt(), Component.text(invName));
 
-        for (int i = 0; i < inventory.getSize(); i++) {
-            inventory.setItem(i, (ItemStack) dataInput.readObject());
-        }
+            for (int i = 0; i < inventory.getSize(); i++) {
+                inventory.setItem(i, (ItemStack) dataInput.readObject());
+            }
 
-        dataInput.close();
+            dataInput.close();
+
+        } catch(IOException ignored){}
         return inventory;
     }
 }
