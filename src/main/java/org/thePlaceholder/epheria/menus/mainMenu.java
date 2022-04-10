@@ -14,14 +14,14 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerAttemptPickupItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.thePlaceholder.epheria.data.playerWorldManager;
 
 public class mainMenu implements Listener
 {
+    public ItemStack phItem = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
+
     @EventHandler
     public void inventoryClick(InventoryClickEvent event) throws ClassNotFoundException {
         HumanEntity human = event.getWhoClicked();
@@ -30,7 +30,7 @@ public class mainMenu implements Listener
         ItemStack customEnderChestItem = customEnderChest.getItem();
         ItemStack clickedItem = event.getCurrentItem();
 
-        ItemStack phItem = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
+
         ItemMeta phItemMeta = phItem.getItemMeta();
         phItemMeta.displayName(Component.text(" "));
         phItem.setItemMeta(phItemMeta);

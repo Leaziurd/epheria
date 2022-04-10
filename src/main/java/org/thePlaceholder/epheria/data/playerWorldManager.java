@@ -4,6 +4,7 @@ import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.thePlaceholder.epheria.epheria;
 
+import java.util.List;
 import java.util.UUID;
 
 public class playerWorldManager
@@ -32,7 +33,7 @@ public class playerWorldManager
 
             wc.environment(World.Environment.NORMAL);
             wc.type(WorldType.NORMAL);
-            wc.seed((long) (Math.random()*100));
+            wc.seed((long) (Math.random()*1000000));
 
             world = wc.createWorld();
 
@@ -40,7 +41,12 @@ public class playerWorldManager
 
             WorldBorder border = world.getWorldBorder();
             border.setCenter(0,0);
-            border.setSize(512);
+            int wSize = 512;
+
+            if()
+            if(player.hasPermission("epheria.op")) wSize = 10240;
+
+            border.setSize(wSize);
         }
 
         return world;
@@ -49,6 +55,14 @@ public class playerWorldManager
     public static void unload(Player player)
     {
         World world = create(player);
+        List<Player> players = world.getPlayers();
+
+        for(int i = 0; i < players.size(); i++)
+        {
+            Player player2kick = players.get(i);
+            join(player2kick);
+        }
+
         epheria.getInstance().getServer().unloadWorld(world, true);
     }
 }
