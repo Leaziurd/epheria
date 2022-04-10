@@ -10,26 +10,25 @@ public class playerWorldManager
 {
     public static void join(Player player)
     {
-        create(player);
-        UUID uuid = player.getUniqueId();
-        String worldName = uuid + "-pocket_dimension";
-        World world = epheria.getInstance().getServer().getWorld(worldName);
-        Location loc = new Location(world, 0, world.getHighestBlockYAt(0, 0), 0);
+        World world = create(player);
+        Location loc = new Location(world, 0, world.getHighestBlockYAt(0, 0) + 1, 0);
+
+        epheria.getInstance().getServer().getWorlds().add(world);
 
         player.teleport(loc);
 
         player.setGameMode(GameMode.SURVIVAL);
     }
 
-    public static void create(Player player)
+    public static World create(Player player)
     {
         UUID uuid = player.getUniqueId();
-        String worldName = uuid + "-pocket_dimension";
+        String worldName = "./plugins/epheria/player-data/" + uuid + "/pocket-dimension";
         World world = epheria.getInstance().getServer().getWorld(worldName);
 
         if(world == null)
         {
-            WorldCreator wc = new WorldCreator(uuid + "-pocket_dimension");
+            WorldCreator wc = new WorldCreator(worldName);
 
             wc.environment(World.Environment.NORMAL);
             wc.type(WorldType.NORMAL);
@@ -43,23 +42,13 @@ public class playerWorldManager
             border.setCenter(0,0);
             border.setSize(512);
         }
-        else
-        {
-            epheria.getInstance().getServer().getWorlds().add(world);
-        }
-    }
 
-    public static void delete(Player player)
-    {
-
+        return world;
     }
 
     public static void unload(Player player)
     {
-        UUID uuid = player.getUniqueId();
-        String worldName = uuid + "-pocket_dimension";
-        World world = epheria.getInstance().getServer().getWorld(worldName);
-
+        World world = create(player);
         epheria.getInstance().getServer().unloadWorld(world, true);
     }
 }

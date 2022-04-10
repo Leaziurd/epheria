@@ -11,9 +11,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.player.PlayerAttemptPickupItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.thePlaceholder.epheria.data.playerWorldManager;
 
@@ -42,15 +45,18 @@ public class mainMenu implements Listener
         generalMenu.setItem(7, phItem);
         generalMenu.setItem(8, phItem);
 
-        if(clickedItem == phItem | clickedItem == null) return;
+        if(clickedItem == null) return;
+
+        if(clickedItem.isSimilar(phItem))
+        {
+            event.setCancelled(true);
+        }
 
         if(clickedItem.isSimilar(generateMenuStar()))
         {
+            if(event.getInventory().getHolder() instanceof Player) human.getInventory().addItem(human.getItemOnCursor());
             event.setCancelled(true);
             human.openInventory(generalMenu);
-            human.getInventory().removeItem(mainMenu.generateMenuStar());
-            human.getInventory().setItem(17, mainMenu.generateMenuStar());
-            player.updateInventory();
             player.playSound(human.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
         }
 
@@ -63,6 +69,7 @@ public class mainMenu implements Listener
         if(clickedItem.isSimilar(pocketDimensionItem()))
         {
             playerWorldManager.join(player);
+            player.playSound(player.getLocation(), Sound.ENTITY_ENDER_PEARL_THROW, 1, 1);
         }
     }
 
@@ -105,4 +112,9 @@ public class mainMenu implements Listener
         return item;
     }
 
+    @EventHandler
+    public void pickupItem(PlayerAttemptPickupItemEvent event)
+    {
+        event.getPlayer().updateInventory();
+    }
 }

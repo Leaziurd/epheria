@@ -1,6 +1,7 @@
 package org.thePlaceholder.epheria.registers;
 
 import org.thePlaceholder.epheria.events.*;
+import org.thePlaceholder.epheria.items.banana;
 import org.thePlaceholder.epheria.items.sugarDiamond;
 import org.thePlaceholder.epheria.epheria;
 import org.thePlaceholder.epheria.menus.customEnderChest;
@@ -23,5 +24,7 @@ public class registerEvents
         getServer().getPluginManager().registerEvents(new sugarDiamond(), plugin);
         getServer().getPluginManager().registerEvents(new playerResource(), plugin);
         getServer().getPluginManager().registerEvents(new cancelInSpawn(), plugin);
+        getServer().getPluginManager().registerEvents(new playerRespawn(), plugin);
+        getServer().getPluginManager().registerEvents(new banana(), plugin);
     }
 }

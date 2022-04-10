@@ -7,16 +7,19 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.thePlaceholder.epheria.data.moneyManager;
 import org.thePlaceholder.epheria.data.prefix;
+import org.thePlaceholder.epheria.menus.mainMenu;
 
 public class playerDeath implements Listener
 {
     @EventHandler
-    public void playerDeathEvent(final PlayerDeathEvent event)
+    public void playerDeathEvent(PlayerDeathEvent event)
     {
+        event.getDrops().remove(mainMenu.generateMenuStar());
+
         double account = moneyManager.get(event.getPlayer());
-        if(account > 0)
+        double lostMoney = - account - (account % 20.0);
+        if(account < lostMoney)
         {
-            double lostMoney = - account - (account % 20.0);
             moneyManager.add(event.getEntity(), (int) lostMoney);
             event.deathMessage(Component.text(prefix.get(event.getPlayer()) + " " + event.getEntity().getName() + ChatColor.WHITE + " died and lost " + ChatColor.DARK_PURPLE + lostMoney + " EPH"));
         }
